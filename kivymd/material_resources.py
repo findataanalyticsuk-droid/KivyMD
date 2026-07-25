@@ -17,7 +17,5 @@ if "KIVY_DOC_INCLUDE" in os.environ:
 DEVICE_IOS = platform == "ios" or platform == "macosx"
 if platform != "android" and platform != "ios":
     DEVICE_TYPE = "desktop"
-elif Window.width and Window.height and Window.width >= dp(600) and Window.height >= dp(600):
-    DEVICE_TYPE = "tablet"
 else:
     DEVICE_TYPE = "mobile"
