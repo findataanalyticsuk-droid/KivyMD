@@ -1333,6 +1333,8 @@ class ThemeManager(EventDispatcher):
     _set_clearcolor = False
 
     def set_clearcolor_by_theme_style(self, theme_style):
+        if not Window:
+            return
         if self.theme_style_switch_animation and self._set_clearcolor:
             Animation(
                 clearcolor=get_color_from_hex(
@@ -1717,10 +1719,12 @@ class ThemableBehavior(EventDispatcher):
 
         # Canceling a scheduled method call on_window_touch for MDLabel
         # objects.
+
         if (
             issubclass(widget.__class__, self.md_label)
             and self.md_label.allow_selection
+            and Window
         ):
             Window.unbind(on_touch_down=widget.on_window_touch)
-
         super().remove_widget(widget)
+
