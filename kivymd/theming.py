@@ -1553,8 +1553,9 @@ class ThemeManager(EventDispatcher):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Clock.schedule_once(lambda x: self.on_theme_style(0, self.theme_style))
-        self._determine_device_orientation(None, Window.size)
-        Window.bind(size=self._determine_device_orientation)
+        if Window:
+            self._determine_device_orientation(None, Window.size)
+            Window.bind(size=self._determine_device_orientation)
         self.bind(font_styles=self.sync_theme_styles)
         self.colors = colors
         Clock.schedule_once(self.sync_theme_styles)
